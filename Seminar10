@@ -1,0 +1,28 @@
+import seaborn as sns
+import pandas as pd
+
+!gdown --id 1oT_EAho8khCg31dIHvPKkNNEpnLwk_AT
+df = pd.read_csv('Pokemon.csv')
+df.head()
+
+
+import random
+lst = ['robot'] * random.randint(5, 15) 
+lst += ['human'] * random.randint(5, 15) 
+lst += ['alien'] * random.randint(5, 15) 
+lst += ['dog'] * random.randint(5, 15) 
+lst += ['cat'] * random.randint(5, 15) 
+random.shuffle(lst)
+data = pd.DataFrame({'whoAmI':lst})
+data.head() 
+
+
+data.loc[data['whoAmI'] == 'robot', 'one_hot'] = 0
+data.loc[data['whoAmI'] == 'human', 'one_hot'] = 1
+data.loc[data['whoAmI'] == 'alien', 'one_hot'] = 2
+data.loc[data['whoAmI'] == 'dog', 'one_hot'] = 3
+data.loc[data['whoAmI'] == 'cat', 'one_hot'] = 4
+data['one_hot']
+
+
+sns.histplot(data = data, x= 'whoAmI')
